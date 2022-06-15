@@ -90,9 +90,13 @@ const theme = createTheme({
     black: {
       main: grey[900],
     },
+    up: "#16c784",
+    down: "#ea3943",
+    primary: { main: "#3861fb", light: "#3861fb" },
+    google: "rgb(255, 255, 255)",
   },
   shape: {
-    borderRadius: 16,
+    borderRadius: 10,
   },
 });
 

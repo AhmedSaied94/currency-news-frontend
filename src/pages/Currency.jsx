@@ -90,7 +90,7 @@ const Currency = ({ currency, geoData }) => {
             <CurrencyHeader base={base} currency={currency} />
           </Box>
 
-          {currency.currency_type !== "Base_Currency" && (
+          {currency.currency_type === 'Normal Currency' && (
             <BasesChips base={base} currency={currency} setBase={setBase} />
           )}
           <Grid sx={{ p: 2 }} container spacing={2}>

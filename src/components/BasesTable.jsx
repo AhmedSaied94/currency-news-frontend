@@ -79,6 +79,9 @@ const BasesTable = ({ bases, authedUser, geoData }) => {
           price: `${
             Math.round((base.home_value + Number.EPSILON) * 100) / 100
           } ${sympol}`,
+          sellPrice:`${
+            Math.round((base.home_value + base.profit_margin + Number.EPSILON) * 100) / 100
+          } ${sympol}`,
           "24h": Math.round((h24 + Number.EPSILON) * 100) / 100,
           "7d": -2.5,
           lastClose: `${
@@ -183,21 +186,28 @@ const BasesTable = ({ bases, authedUser, geoData }) => {
     {
       field: "price",
       headerName: "Price",
-      width: 170,
+      width: 136,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "sellPrice",
+      headerName: "Sell Price",
+      width: 136,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "lastClose",
       headerName: "Last Close",
-      width: 170,
+      width: 136,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "24h",
       headerName: "24h",
-      width: 170,
+      width: 136,
       align: "center",
       headerAlign: "center",
       renderCell: renderPerc,
@@ -205,7 +215,7 @@ const BasesTable = ({ bases, authedUser, geoData }) => {
     {
       field: "7d",
       headerName: "7d",
-      width: 170,
+      width: 136,
       align: "center",
       headerAlign: "center",
       renderCell: renderPerc,

@@ -17,7 +17,7 @@ const Area = () => {
   const primaryAxis = React.useMemo(
     (): AxisOptions<DailyStars> => ({
       getValue: datum => datum.date,
-      
+
     }),
     []
   )
@@ -28,6 +28,7 @@ const Area = () => {
         getValue: datum => datum.stars,
         // elementType: 'area',
         stacked: true,
+        position:'right'
       },
     ],
     []
@@ -72,7 +73,7 @@ const Area = () => {
         },
       ]
     )
-  }, []) 
+  }, [])
 
 
   return (
@@ -82,7 +83,7 @@ const Area = () => {
       data,
       primaryAxis,
       secondaryAxes,
-      
+
     }}
   />
   </div>

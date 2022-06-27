@@ -25,10 +25,12 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     // maxWidth: "90%",
   },
   "& .MuiDialogActions-root": {
-    padding: "16px 24px",
+    padding: useMediaQuery(theme.breakpoints.up("sm"))
+      ? "16px 24px"
+      : "16px 12px",
   },
   "& .MuiDialog-paper": {
-    maxWidth: "90%",
+    maxWidth: useMediaQuery(theme.breakpoints.up("sm")) ? "90%" : "none",
   },
 }));
 
@@ -107,21 +109,26 @@ const CurrenciesDialog = ({ changeCur, sympols, authedUser }) => {
               flexDirection: "row",
               flexWrap: "wrap",
               alignItems: "stretch",
-              justifyContent: "space-evenly",
+              justifyContent: useMediaQuery(theme.breakpoints.up("sm"))
+                ? "space-evenly"
+                : "space-between",
             }}
           >
-            {sympols.map((cur) => {
-              return (
-                <Box
-                  onClick={() => {
-                    onChangeCur(cur).catch((err) => console.log(err.response));
-                  }}
-                  key={cur.id}
-                >
-                  <CurrencyCard sympol={cur} />
-                </Box>
-              );
-            })}
+            {sympols.length > 0 &&
+              sympols.map((cur) => {
+                return (
+                  <Box
+                    onClick={() => {
+                      onChangeCur(cur).catch((err) =>
+                        console.log(err.response)
+                      );
+                    }}
+                    key={cur.id}
+                  >
+                    <CurrencyCard sympol={cur} />
+                  </Box>
+                );
+              })}
           </Box>
         </DialogContent>
       </BootstrapDialog>

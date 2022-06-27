@@ -58,12 +58,17 @@ const NewsContent = ({ news }) => {
       {news.value ? (
         Object.keys(news.value).map((carat, inx) => {
           return (
-            <>
+            <div key={carat}>
               <Typography sx={{ mt: 5 }} component="h2" variant="h3">
                 سعر{" "}
                 {carat === "ounce"
-                  ? `اوقية ال${news.cur_name.base}`
-                  : `ال${news.cur_name.base} عيار ${carat}`}{" "}
+                  ? `اوقية ${news.cur_name.base}`
+                  : carat.indexOf("1k") > 0
+                  ? ` سبيكة الذهب وزن 1كجم`
+                  : carat.indexOf("ingot") > -1
+                  ? ` سبيكة الذهب وزن ${carat.substring(5)} جرام`
+                  :`${news.cur_name.base} عيار ${carat}`
+                }{" "}
                 في {news.cur_name.country} اليوم
               </Typography>
               <Typography
@@ -74,18 +79,18 @@ const NewsContent = ({ news }) => {
                 و{inx > 0 ? `${connect[Math.floor(Math.random() * 9)]} ` : ""}
                 {vocs[Math.floor(Math.random() * 5)]}{" "}
                 {carat === "ounce"
-                  ? `سعر اوقية ال${news.cur_name.base}`
+                  ? `سعر اوقية ${news.cur_name.base}`
                   : carat.indexOf("1k") > 0
                   ? `سعر سبيكة الذهب وزن 1كجم`
                   : carat.indexOf("ingot") > -1
                   ? `سعر سبيكة الذهب وزن ${carat.substring(5)}`
                   : `سعر جرام ال${news.cur_name.base} عيار ${carat}`}{" "}
                 في {news.cur_name.country} اليوم {news.ar_date} عند{" "}
-                {news.value[carat]} {news.cur_name.normal} بحسب متوسط سعر
+                {news.value[carat]} {news.cur_name.normal} للشراء مقابل {news.value[carat]+news.profit_margin} {news.cur_name.normal} للبيع بحسب متوسط سعر
                 التنفيذ في الأسواق، مقابل سعر بيع معلن أمس{" "}
-                {news.close_value[carat]} {news.cur_name.normal} عند الإغلاق
+                {Math.round((news.close_value[carat]+news.profit_margin+Number.EPSILON)*100)/100} {news.cur_name.normal} عند الإغلاق
               </Typography>
-            </>
+            </div>
           );
         })
       ) : (

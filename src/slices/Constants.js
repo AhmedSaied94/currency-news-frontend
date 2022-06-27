@@ -17,6 +17,8 @@ const constants = createSlice({
                 action.payload.state === 'open'? state.reset = true: state.reset=false
             } else if (action.payload.com === 'changeCur'){
             action.payload.state === 'open'? state.changeCur = true: state.changeCur=false
+            } else if (action.payload.com === 'calculator'){
+            action.payload.state === 'open'? state.calculator = true: state.calculator=false
         }
             
         },

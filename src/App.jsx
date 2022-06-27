@@ -24,6 +24,7 @@ import Settings from "./components/Settings";
 import ResetPassword from "./components/ResetPassword";
 import ResetConfirm from "./components/ResetConfirm";
 import CurrenciesDialog from "./components/CurrenciesDialog";
+import Calculator from "./components/Calculator";
 function App({ authedUser, geoData }) {
   const [cookies, setCookie, removeCookie] = useCookies(["currency_news"]);
   const [signCom, setSignCom] = React.useState(false);
@@ -91,7 +92,7 @@ function App({ authedUser, geoData }) {
             handleUnauthorized(error, enqueueSnackbar);
           else Store.dispatch(login(null));
         });
-    } else if (geoData) {
+    } else if (geoData.currency) {
       Store.dispatch(login(null));
       fetchBases(geoData.currency).catch(
         (error) =>
@@ -137,6 +138,7 @@ function App({ authedUser, geoData }) {
           <Signup />
           <ResetPassword />
           <CurrenciesDialog />
+          <Calculator />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/currency" element={<Currency />} />

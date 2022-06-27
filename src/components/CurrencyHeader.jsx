@@ -43,9 +43,13 @@ const CurrencyHeader = ({ currency, homeValue, base, authedUser }) => {
         }}
       >
         <Avatar
-          src={`https://countryflagsapi.com/svg/${currency.sympol
+          src={currency.currency_type !== 'Metals'?
+            `https://countryflagsapi.com/svg/${currency.sympol
             .substring(0, 2)
-            .toLowerCase()}`}
+            .toLowerCase()}`
+            :currency.name === 'Silver'? '/silver.png'
+            : `/${currency.name.toLowerCase()}.jpg`
+          }
         />
         <Typography sx={{ mx: 2, fontWeight: 500 }} component="h6" variant="h4">
           {currency.name}
@@ -102,8 +106,8 @@ const CurrencyHeader = ({ currency, homeValue, base, authedUser }) => {
             component="h6"
             variant="h4"
           >
-            {currency.currency_type === "Base_Currency"
-              ? currency.home_alue
+            {currency.currency_type !== 'Normal Currency'
+              ? currency.home_value
               : `${base} = ${currency.home_value}`}
           </Typography>
           <Chip
@@ -123,9 +127,9 @@ const CurrencyHeader = ({ currency, homeValue, base, authedUser }) => {
             size="large"
             label={
               Math.round(
-                ((currency.home_value.substring(0, 5) -
-                  currency.close_price.substring(0, 6)) /
-                  currency.close_price.substring(0, 6) +
+                ((currency.home_value.substring(0, currency.home_value.length-4) -
+                  currency.close_price.substring(0, currency.close_price.length-4)) /
+                  currency.close_price.substring(0, currency.close_price.length-4) +
                   Number.EPSILON) *
                   1000
               ) /

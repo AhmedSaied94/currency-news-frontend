@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import { Avatar } from "@mui/material";
+import { Avatar, useMediaQuery } from "@mui/material";
 import theme from "../styles/Theme";
 
 const CurrencyCard = ({ sympol }) => {
@@ -16,7 +16,7 @@ const CurrencyCard = ({ sympol }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
-        width: 300,
+        width: useMediaQuery(theme.breakpoints.up("sm")) ? 300 : 180,
         m: 1,
         backgroundColor: "#fff",
         cursor: "pointer",

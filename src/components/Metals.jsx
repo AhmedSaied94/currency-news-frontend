@@ -12,6 +12,9 @@ import Store from "../Store";
 import { useCookies } from "react-cookie";
 import { axiosFetchInstance } from "../Axios";
 import { authInfo } from "../slices/Constants";
+import {Box} from '@mui/system'
+import {Link} from 'react-router-dom'
+import {Avatar} from '@mui/material'
 
 const Metals = ({ type, authedUser, geoData, metals }) => {
   const [cookies] = useCookies(["currency_news"]);
@@ -68,7 +71,7 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
         "24 carat",
         "21 carat",
         "18 carat",
-        "44 carat",
+        "14 carat",
         "5G ingot",
         "100 G ingot",
         "250 G ingot",
@@ -90,6 +93,8 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
         value =
           carat === "ounce"
             ? price
+            :carat.indexOf('Kg') > 0
+            ? price / 31.1 * 1000
             : carat.indexOf("ingot") > 0
             ? (carat
                 .split("")
@@ -128,9 +133,12 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
             Rows[arrayName].push({
               "#": carats[metal.name].indexOf(carat) + 1,
               id: metal.id + carat,
-              carat: carat,
+              carat: {carat, name:metal.name, sympol:metal.sympol},
               price: `${
                 Math.round((current + Number.EPSILON) * 100) / 100
+              } ${sympol}`,
+              sellPrice: `${
+                Math.round((current + metal.profit_margin + Number.EPSILON) * 100) / 100
               } ${sympol}`,
               "24h":
                 Math.round(
@@ -150,9 +158,13 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
           Rows.OtherRows.push({
             "#": counter,
             id: metal.id,
-            carat: metal.name,
+            carat: {carat:'', name:metal.name, sympol:metal.sympol},
             price:
               Math.round((metal.home_value / 31.1 + Number.EPSILON) * 100) /
+                100 +
+              ` ${sympol}`,
+            sellPrice:
+              Math.round((metal.home_value / 31.1 + metal.profit_margin + Number.EPSILON) * 100) /
                 100 +
               ` ${sympol}`,
             "24h":
@@ -181,7 +193,7 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
   const columns = [
     {
       field: "addtofav",
-      width: 5,
+      width: 10,
       headerName: "",
       align: "center",
       renderCell: (id) => {
@@ -207,7 +219,7 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
     {
       field: "#",
       headerName: "#",
-      width: 15,
+      width: 10,
       align: "left",
       headerAlign: "left",
       cellClassName: "normalCell",
@@ -215,28 +227,85 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
     {
       field: "carat",
       headerName: "carat",
-      width: 170,
+      width: 250,
       align: "center",
       headerAlign: "center",
+      renderCell: (values) => {
+        const metalName = values.value.name
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              width: "100%",
+              "& a": {
+                color: "inherit",
+                textDecoration: "none",
+                "&:hover": {
+                  color: "inherit",
+                  textDecoration: "none",
+                },
+              },
+            }}
+          >
+            <Link to={`/currency?sympol=${values.value.sympol}`}>
+              {" "}
+              <Avatar
+                sx={{ width: 30, height: 30 }}
+                src={
+                  metalName === 'Gold'? '/gold.jpg'
+                  :metalName === 'Silver'? '/silver.png'
+                  :metalName === 'Palladium'? '/palladium.jpg'
+                  :'/platinum.jpg'
+                }
+              />
+            </Link>
+            <Link to={`/currency?sympol=${values.value.sympol}`}>
+              {" "}
+              <p
+                style={{
+                  margin: "0 0.5rem",
+                }}
+              >
+                {values.value.name} {values.value.carat}
+              </p>
+            </Link>
+            <Link to={`/currency?sympol=${values.value.sympol}`}>
+              {" "}
+              <h4 style={{ color: theme.palette.grey.dark }}>
+                {values.value.sympol}
+              </h4>
+            </Link>
+          </Box>
+        );
+      },
     },
     {
       field: "price",
       headerName: "Price",
-      width: 170,
+      width: 136,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "sellPrice",
+      headerName: "Sell Price",
+      width: 136,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "lastClose",
       headerName: "Last Close",
-      width: 170,
+      width: 136,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "24h",
       headerName: "24h",
-      width: 170,
+      width: 136,
       align: "center",
       headerAlign: "center",
       renderCell: renderPerc,
@@ -244,7 +313,7 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
     {
       field: "7d",
       headerName: "7d",
-      width: 170,
+      width: 136,
       align: "center",
       headerAlign: "center",
       renderCell: renderPerc,
@@ -252,7 +321,7 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
     {
       field: "last7chart",
       headerName: "Last 7 Chart",
-      width: 310,
+      width: 280,
       align: "center",
       headerAlign: "center",
       renderCell: (values) => {

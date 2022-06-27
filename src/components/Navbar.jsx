@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import SearchIcon from "@mui/icons-material/Search";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
@@ -21,23 +21,24 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
 import theme from "../styles/Theme";
 import { useTheme } from "@emotion/react";
-import { FiLogIn } from "react-icons/fi";
 import { connect } from "react-redux";
 import Store from "../Store";
 import { authInfo } from "../slices/Constants";
 import { Link } from "react-router-dom";
+import { GrCurrency } from "react-icons/gr";
+import { ImCalculator, ImMenu } from "react-icons/im";
+import { TiThMenu } from "react-icons/ti";
+import { BsStarFill } from "react-icons/bs";
+import { RiLogoutCircleRLine, RiLoginCircleLine } from "react-icons/ri";
+import { MdManageAccounts, MdNoAccounts } from "react-icons/md";
+import { ListItem } from "@mui/material";
 
 const pages = ["currencies", "calculator", "watchlist"];
 const settings = ["settings", "watchlist", "logout"];
-const bases = ["USD", "EUR", "UAD", "SAR"];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -148,6 +149,7 @@ const Navbar = (props) => {
           },
           "& .MuiToolbar-root": {
             minHeight: "auto",
+            justifyContent: "space-between",
           },
           "& .MuiAvatar-root": {
             width: 30,
@@ -191,113 +193,69 @@ const Navbar = (props) => {
               </Typography>
             </Link>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              {/* <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-              <MenuItem>
-                <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
-                  <Tooltip title="Open settings">
-                    <Typography onClick={handleOpenUserMenu} textAlign="center">
-                      Accounnt
-                    </Typography>
-                  </Tooltip>
-                  <Menu
-                    sx={{ mt: "45px" }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-                    {settings.map((setting) => (
-                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
-                      </MenuItem>
-                    ))}
-                  </Menu>
-                </Box>
-              </MenuItem>
-            </Menu> */}
-            </Box>
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".2rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              Srrafa.com
-            </Typography>
+            <Link style={{ textDecoration: "none" }} to="/">
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  mr: 2,
+                  display: { xs: "flex", md: "none" },
+                  flexGrow: 1,
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".2rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                Srrafa.com
+              </Typography>
+            </Link>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Link
-                  key={page}
-                  style={{ textDecoration: "none" }}
-                  to={`/${page}`}
-                >
-                  <Button
-                    // onClick={handleCloseNavMenu}
-                    sx={{
-                      m: 1,
-                      my: 0,
-                      py: 0,
-                      color: "white",
-                      display: "block",
-                    }}
-                  >
-                    {page}
-                  </Button>
-                </Link>
-              ))}
+              {pages.map((page) => {
+                if (page !== "calculator") {
+                  return (
+                    <Link
+                      key={page}
+                      style={{ textDecoration: "none" }}
+                      to={`/${page}`}
+                    >
+                      <Button
+                        sx={{
+                          m: 1,
+                          my: 0,
+                          py: 0,
+                          color: "white",
+                          display: "block",
+                        }}
+                      >
+                        {page}
+                      </Button>
+                    </Link>
+                  );
+                } else {
+                  return (
+                    <Button
+                      onClick={() =>
+                        Store.dispatch(
+                          authInfo({ com: "calculator", state: "open" })
+                        )
+                      }
+                      key={page}
+                      sx={{
+                        m: 1,
+                        my: 0,
+                        py: 0,
+                        color: "white",
+                        display: "block",
+                      }}
+                    >
+                      {page}
+                    </Button>
+                  );
+                }
+              })}
             </Box>
             {props.authedUser !== null ? (
               <Box
@@ -355,7 +313,7 @@ const Navbar = (props) => {
                 </Menu>
               </Box>
             ) : (
-              <Box sx={{ flexGrow: 0 }}>
+              <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
                 <Button
                   className="login"
                   onClick={() =>
@@ -377,7 +335,7 @@ const Navbar = (props) => {
                 </Button>
               </Box>
             )}
-            <Search>
+            <Search sx={{ display: { xs: "none", md: "flex" } }}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
@@ -387,8 +345,16 @@ const Navbar = (props) => {
               />
             </Search>
             <Box
-              sx={{ ml: 1, flexGrow: 0, display: { xs: "none", md: "flex" } }}
+              sx={{
+                flexGrow: 0,
+                display: { xs: "flex", md: "none" },
+              }}
             >
+              <IconButton>
+                <SearchIcon />
+              </IconButton>
+            </Box>
+            <Box sx={{ ml: 1, flexGrow: 0, display: "flex" }}>
               <Tooltip title="Select Base Currency">
                 <IconButton
                   onClick={() =>
@@ -412,28 +378,73 @@ const Navbar = (props) => {
                   />
                 </IconButton>
               </Tooltip>
-              {/* <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElCurrency}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElCurrency)}
-                onClose={handleCloseCurrencyMenu}
+            </Box>
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
               >
-                {bases.map((base) => (
-                  <MenuItem key={base} onClick={handleCloseCurrencyMenu}>
-                    <Typography textAlign="center">{base}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu> */}
+                <TiThMenu />
+              </IconButton>
+              {/* <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+              <MenuItem>
+                <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
+                  <Tooltip title="Open settings">
+                    <Typography onClick={handleOpenUserMenu} textAlign="center">
+                      Accounnt
+                    </Typography>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "45px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map((setting) => (
+                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+              </MenuItem>
+            </Menu> */}
             </Box>
           </Toolbar>
         </Container>
@@ -449,16 +460,29 @@ const Navbar = (props) => {
             width: "100%",
             height: "100%",
             bgcolor: "background.paper",
+            "& a": {
+              textDecoration: "none",
+              color: "inherit",
+              "&:hover": {
+                textDecoration: "none",
+              },
+            },
+            "& .MuiListItemIcon-root": {
+              fontSize: 22,
+              "& svg": {
+                ml: 0.75,
+              },
+            },
           }}
           component="nav"
           aria-labelledby="nested-list-subheader"
           subheader={
             <ListSubheader component="div" id="nested-list-subheader">
-              Nested List Items
+              Go to
             </ListSubheader>
           }
         >
-          <ListItemButton onClick={() => handleOpenMenus("base")}>
+          {/* <ListItemButton onClick={() => handleOpenMenus("base")}>
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
@@ -478,39 +502,110 @@ const Navbar = (props) => {
                 );
               })}
             </List>
-          </Collapse>
+          </Collapse> */}
+          <ListItem>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          </ListItem>
           {pages.map((page, ind) => {
-            return (
-              <ListItemButton key={ind}>
+            return page !== "calculator" ? (
+              <Link key={ind} to={`/${page}`}>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {page === "currencies" ? (
+                      <GrCurrency />
+                    ) : page === "calculator" ? (
+                      <ImCalculator />
+                    ) : (
+                      <BsStarFill />
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary={page} />
+                </ListItemButton>
+              </Link>
+            ) : (
+              <ListItemButton
+                key={ind}
+                onClick={() =>
+                  Store.dispatch(authInfo({ com: "calculator", state: "open" }))
+                }
+              >
                 <ListItemIcon>
-                  <SendIcon />
+                  {page === "currencies" ? (
+                    <GrCurrency />
+                  ) : page === "calculator" ? (
+                    <ImCalculator />
+                  ) : (
+                    <BsStarFill />
+                  )}
                 </ListItemIcon>
                 <ListItemText primary={page} />
               </ListItemButton>
             );
           })}
+          {props.authedUser ? (
+            <>
+              <ListItemButton onClick={() => handleOpenMenus("user")}>
+                <ListItemIcon>
+                  <Avatar
+                    alt={props.authedUser.fullname}
+                    src={
+                      props.authedUser.profile_pic
+                        ? `${props.host}${props.authedUser.profile_pic}`
+                        : ""
+                    }
+                  />
+                </ListItemIcon>
+                <ListItemText primary="Account" />
+                {userMenu ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
 
-          <ListItemButton onClick={() => handleOpenMenus("user")}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Account" />
-            {userMenu ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={userMenu} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {settings.map((setting, ind) => {
-                return (
-                  <ListItemButton key={ind} sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <StarBorder />
-                    </ListItemIcon>
-                    <ListItemText primary={setting} />
-                  </ListItemButton>
-                );
-              })}
-            </List>
-          </Collapse>
+              <Collapse in={userMenu} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {settings.map((setting, ind) => {
+                    if (setting !== "watchlist")
+                      return (
+                        <Link key={ind} to={`/${setting}`}>
+                          <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemIcon>
+                              {setting === "logout" ? (
+                                <RiLogoutCircleRLine />
+                              ) : (
+                                <MdManageAccounts />
+                              )}
+                            </ListItemIcon>
+                            <ListItemText primary={setting} />
+                          </ListItemButton>
+                        </Link>
+                      );
+                  })}
+                </List>
+              </Collapse>
+            </>
+          ) : (
+            <>
+              <ListItemButton>
+                <ListItemIcon>
+                  <RiLoginCircleLine />
+                </ListItemIcon>
+                <ListItemText primary={"Log in"} />
+              </ListItemButton>
+
+              <ListItemButton>
+                <ListItemIcon>
+                  <MdNoAccounts />
+                </ListItemIcon>
+                <ListItemText primary={"Sign up"} />
+              </ListItemButton>
+            </>
+          )}
         </List>
       </Collapse>
     </React.Fragment>

@@ -2,6 +2,10 @@
   "name": "currency_news_frontend",
   "private": true,
   "version": "0.0.0",
+  "engines": {
+  "node": "17.1.1",
+  "npm": "8.10.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

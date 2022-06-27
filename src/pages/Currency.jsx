@@ -48,7 +48,8 @@ const Currency = ({ currency, geoData }) => {
 
       Store.dispatch(setCurrency({ currency: res.data }));
     };
-
+    console.console.log(query);
+    console.log(cookies.tokens)
     fetchCurrency(query.sympol).catch((err) => console.log(err));
 
     return () => Store.dispatch(setCurrency({ currency: null }));

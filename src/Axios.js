@@ -3,7 +3,7 @@ import Store from './Store';
 import { authInfo } from './slices/Constants';
 import { useCookies } from 'react-cookie';
 
-const baseUrl = 'http://localhost:8000/api/'
+const baseUrl = 'https://api-srrafa.herokuapp.com/api/'
 
 export const axiosInstance = axios.create({
     baseURL: baseUrl,
@@ -19,7 +19,7 @@ export const axiosFetchInstance = (tokens) => {
         baseURL: baseUrl,
         timeout: 60000,
         headers: {
-            Authorization: tokens 
+            Authorization: tokens
                 ? `Bearer ${tokens.access_token}`
                 : null,
             'content-type': 'application/json',
@@ -49,7 +49,7 @@ export const handleUnauthorized = (error, snackbar) => {
 
     if (typeof error === 'undefined') {
         snackbar(
-            `A server/network error 
+            `A server/network error
             looks like cors may be the problem
             sorry about this, we will get it fixed shortly`,
             'error'
@@ -59,7 +59,7 @@ export const handleUnauthorized = (error, snackbar) => {
         },3000)
     }
     if (
-        response.status === 401 && 
+        response.status === 401 &&
         response.data.detail === "Authentication credentials were not provided." &&
         response.statusText === "Unauthorized"
         ){
@@ -112,7 +112,7 @@ export const handleUnauthorized = (error, snackbar) => {
 //         const originalRequest = error.config
 //         if (typeof error === 'undefined') {
 //         enqueueSnackbar(
-//             `A server/network error 
+//             `A server/network error
 //             looks like cors may be the problem
 //             sorry about this, we will get it fixed shortly`,
 //             'error'
@@ -121,7 +121,7 @@ export const handleUnauthorized = (error, snackbar) => {
 //         };
 
 //         if (
-//             error.response.status === 401 && 
+//             error.response.status === 401 &&
 //             error.response.data.detail === "Authentication credentials were not provided." &&
 //             error.response.statusText === "Unauthorized"
 //             ){
@@ -157,7 +157,7 @@ export const handleUnauthorized = (error, snackbar) => {
 //             } else {
 //                 window.location.href = '/login'
 //             }
-    
+
 //         }
 //         if (
 //             error.response.status === 401 &&
@@ -165,4 +165,3 @@ export const handleUnauthorized = (error, snackbar) => {
 //         ) window.location.href = '/login'
 //     }
 // )
-

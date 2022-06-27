@@ -3,8 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "engines": {
-    "node": "17.1.x",
-    "npm": "8.10.x"
+    "node": "17.x.x",
+    "npm": "8.x.x"
   },
   "scripts": {
     "dev": "vite",

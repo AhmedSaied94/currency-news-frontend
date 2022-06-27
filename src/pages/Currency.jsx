@@ -45,10 +45,10 @@ const Currency = ({ currency, geoData }) => {
         arr[news.date] = inx;
       });
       setDays(arr);
-
+      console.log(res.data);
       Store.dispatch(setCurrency({ currency: res.data }));
     };
-    console.console.log(query);
+    console.log(query);
     console.log(cookies.tokens)
     fetchCurrency(query.sympol).catch((err) => console.log(err));
 

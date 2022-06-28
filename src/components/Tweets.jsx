@@ -1,6 +1,5 @@
 import React from "react";
 import { Box } from "@mui/material";
-import { TwitterTweetEmbed } from "react-twitter-embed";
 import TwitterTweet from './TwitterTweet'
 
 const Tweets = ({ tweets }) => {

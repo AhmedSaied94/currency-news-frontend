@@ -114,7 +114,7 @@ const Currency = ({ currency, geoData }) => {
               <Box sx={{ my: 2, px: 2 }} textAlign="left">
                 <Typography variant="h6">Last Tweets</Typography>
               </Box>
-               .. <Tweets tweets={currency.tweets} />
+                // <Tweets tweets={currency.tweets} />
             </Grid>
           </Grid>
         </Box>

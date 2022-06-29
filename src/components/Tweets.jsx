@@ -1,7 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import { TwitterTweet } from "./TwitterTweet";
-
+import TwitterTweet from './TwitterTweet'
 const Tweets = ({ tweets }) => {
   return (
     <Box>

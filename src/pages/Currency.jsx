@@ -22,7 +22,7 @@ import NewsSection from "../components/NewsSection";
 import CurrencyHeader from "../components/CurrencyHeader";
 import BasesChips from "../components/BasesChips";
 
-const Currency = ({ currency, geoData }) => {
+const Currency = ({ currency, geoData, authedUser }) => {
   const location = useLocation();
   const query = QueryString.parse(location.search);
   const [cookies] = useCookies(["currency_news"]);
@@ -97,7 +97,11 @@ const Currency = ({ currency, geoData }) => {
             <Grid item xs={12} md={8}>
               <Box sx={{ my: 3, px: 2 }} textAlign="left">
                 <Typography variant="h6">
-                  {currency.sympol} To {base} Chart
+                  {currency.currency_type !== 'Normal Currency'?
+                    {currency.sympol} To {authedUser? authedUser.home_currency : geoData.currency}
+                  :
+                  {base} To {currency.sympol} Chart
+                }
                 </Typography>
               </Box>
               <Area />
@@ -132,7 +136,8 @@ const Currency = ({ currency, geoData }) => {
 const mapStateToProps = (state) => {
   const { currency } = state.allCurrencies;
   const { geoData } = state.constants;
-  return { currency, geoData };
+  const {authedUser} = state.user
+  return { currency, geoData, authedUser };
 };
 
 export default connect(mapStateToProps, { setCurrency })(Currency);

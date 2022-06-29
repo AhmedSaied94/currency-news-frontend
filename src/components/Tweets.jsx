@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import { TwitterTweetEmbed } from "react-twitter-embed";
+import { TwitterTweet } from "./TwitterTweet";
 
 const Tweets = ({ tweets }) => {
   return (
@@ -8,7 +8,7 @@ const Tweets = ({ tweets }) => {
       {tweets.map((tweet) => {
         return (
           <Box key={tweet.id} sx={{ my: 2 }}>
-            <TwitterTweetEmbed
+            <TwitterTweet
               options={{
                 cards: "hidden",
                 conversation: "none",

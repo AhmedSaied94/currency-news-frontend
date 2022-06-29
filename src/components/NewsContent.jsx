@@ -84,7 +84,7 @@ const NewsContent = ({ news }) => {
                   ? `سعر سبيكة الذهب وزن 1كجم`
                   : carat.indexOf("ingot") > -1
                   ? `سعر سبيكة الذهب وزن ${carat.substring(5)}`
-                  : `سعر جرام ال${news.cur_name.base} عيار ${carat}`}{" "}
+                  : `سعر جرام ${news.cur_name.base} عيار ${carat}`}{" "}
                 في {news.cur_name.country} اليوم {news.ar_date} عند{" "}
                 {news.value[carat]} {news.cur_name.normal} للشراء مقابل {news.value[carat]+news.profit_margin} {news.cur_name.normal} للبيع بحسب متوسط سعر
                 التنفيذ في الأسواق، مقابل سعر بيع معلن أمس{" "}

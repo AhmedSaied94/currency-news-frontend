@@ -98,9 +98,9 @@ const Currency = ({ currency, geoData, authedUser }) => {
               <Box sx={{ my: 3, px: 2 }} textAlign="left">
                 <Typography variant="h6">
                   {currency.currency_type !== 'Normal Currency'?
-                    {currency.sympol} To {authedUser? authedUser.home_currency : geoData.currency}
+                    `${currency.sympol} To ${authedUser? authedUser.home_currency : geoData.currency}`
                   :
-                  {base} To {currency.sympol} Chart
+                  `${base} To ${currency.sympol} Chart`
                 }
                 </Typography>
               </Box>

@@ -77,7 +77,7 @@ const ResetPassword = (props) => {
       "account/password-reset-request/",
       JSON.stringify({
         email,
-        redirect_url: "http://localhost:3000/reset-password",
+        redirect_url: "http://38.242.255.43/reset-password",
       })
     );
     setResetView(false);

@@ -28,7 +28,7 @@ class StateLoader {
     initializeState() {
         return {
             constants:{
-                host:'http://localhost:8000',
+                host:'http://38.242.255.43',
                 login:false,
                 signup:false,
                 reset:false,
@@ -44,7 +44,7 @@ class StateLoader {
                 basesCurrencies:null,
                 currency:null,
             }
-           
+
         };
     }
 }

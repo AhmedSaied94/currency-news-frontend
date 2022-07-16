@@ -39,6 +39,7 @@ const ResetConfirm = () => {
   return (
     <Box
       sx={{
+        direction: "rtl",
         background: mobile
           ? "linear-gradient(rgb(248, 250, 253) 0%, rgba(248, 250, 253, 0) 413px);"
           : "",
@@ -71,7 +72,7 @@ const ResetConfirm = () => {
             variant={mobile ? "h5" : "h6"}
             component="h6"
           >
-            Reset your password
+            اعد تعيين كلمة المرور
           </Typography>
         </Box>
         {reseted === "valid" ? (
@@ -107,7 +108,7 @@ const ResetConfirm = () => {
             autoComplete="off"
           >
             <Box sx={{ mt: 3 }}>
-              <Typography variant="caption">Password</Typography>
+              <Typography variant="caption">كلمة المرور</Typography>
               <TextField
                 name="password"
                 type="password"
@@ -118,7 +119,7 @@ const ResetConfirm = () => {
               />
             </Box>
             <Box sx={{ mt: 3 }}>
-              <Typography variant="caption">Re-password</Typography>
+              <Typography variant="caption">تاكيد كلمة المرور</Typography>
               <TextField
                 name="password2"
                 type="password"
@@ -159,7 +160,7 @@ const ResetConfirm = () => {
               sx={{ my: 4, width: "fit-content" }}
               variant="contained"
             >
-              Change password
+              تغيير كلمة المرور
             </Button>
           </Box>
         ) : (
@@ -186,11 +187,11 @@ const ResetConfirm = () => {
               component="p"
             >
               {reseted === "done"
-                ? "Your password has been reseted successfully please log in with your new password"
-                : "Your token is invalid please try to repeat the request again "}
+                ? "لقد قمت باعادة تعيين كلمة المرور الخاصة بك بنجاح اعد تسجيل الدخول باستخدام كلمة المرور الجديدة"
+                : "انتهت صلاحية الرابط من فضلك اعد عملية اعادة التعيين مرة اخرى"}
             </Typography>
             <Link to="/">
-              <Button variant="contained">Go to home</Button>
+              <Button variant="contained">الذهاب الى الرئيسية</Button>
             </Link>
           </Box>
         )}

@@ -44,7 +44,7 @@ const BootstrapDialogTitle = (props) => {
           onClick={onClose}
           sx={{
             position: "absolute",
-            right: 8,
+            left: 8,
             top: 8,
             color: (theme) => theme.palette.grey[500],
           }}
@@ -113,6 +113,7 @@ const Login = (props) => {
         open={props.login}
         fullScreen={fullScreen}
         sx={{
+          direction: "rtl",
           "& .MuiDialog-paper": {
             // minWidth: "500px",
             backgroundColor: theme.palette.grey.light,
@@ -125,7 +126,7 @@ const Login = (props) => {
             Store.dispatch(authInfo({ com: "login", state: "close" }))
           }
         >
-          Please Login
+          تسجيل الدخول
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Box
@@ -148,7 +149,7 @@ const Login = (props) => {
             <TextField
               fullWidth
               name="email"
-              label="Email"
+              label="البريد الالكتروني"
               value={loginData.email}
               required
               type="email"
@@ -158,7 +159,7 @@ const Login = (props) => {
             <TextField
               fullWidth
               name="password"
-              label="Password"
+              label="كلمة المرور"
               value={loginData.password}
               onChange={handleLoginData}
               required
@@ -180,7 +181,7 @@ const Login = (props) => {
                 Store.dispatch(authInfo({ com: "reset", state: "open" }));
               }}
             >
-              Forget your password?
+              هل نسيت كلمة المرور؟
             </Typography>
             <LoadingButton
               color="sky"
@@ -191,7 +192,7 @@ const Login = (props) => {
               loading={loading}
               fullWidth
             >
-              Login
+              تسجيل الدخول
             </LoadingButton>
             <Typography
               sx={{
@@ -206,9 +207,9 @@ const Login = (props) => {
               }}
               variant="subtitle2"
             >
-              Don't have an account? Sign up here
+              ليس لديك حساب؟ قم بالتسجيل الان
             </Typography>
-            <Typography variant="h6">OR</Typography>
+            <Typography variant="h6">او</Typography>
             <FaceBookLogin />
             <GooGleLogin />
           </Box>

@@ -111,6 +111,7 @@ const Settings = ({ authedUser, host }) => {
   return (
     <Box
       sx={{
+        direction: "rtl",
         background: mobile
           ? "linear-gradient(rgb(248, 250, 253) 0%, rgba(248, 250, 253, 0) 413px);"
           : "",
@@ -143,14 +144,14 @@ const Settings = ({ authedUser, host }) => {
             variant={mobile ? "h5" : "h6"}
             component="h6"
           >
-            Account Settings
+            اعدادات الحساب
           </Typography>
         </Box>
         <Box sx={{ px: mobile ? 4 : 2, py: mobile ? 4 : 3 }}>
           <Box
             sx={{
               display: "flex",
-              justifyContent: "left",
+              justifyContent: "right",
               alignItems: "center",
             }}
           >
@@ -165,7 +166,7 @@ const Settings = ({ authedUser, host }) => {
                   onChange={handleUpload}
                 />
                 <Button variant="contained" component="span">
-                  Change Avatar
+                  تغيير الصورة الشخصية
                 </Button>
               </label>
             </Box>
@@ -200,7 +201,7 @@ const Settings = ({ authedUser, host }) => {
             autoComplete="off"
           >
             <Box sx={{ mt: 3 }}>
-              <Typography variant="caption">Full Name</Typography>
+              <Typography variant="caption">الاسم بالكامل</Typography>
               <TextField
                 name="fullname"
                 value={data.fullname}
@@ -209,20 +210,20 @@ const Settings = ({ authedUser, host }) => {
                 onChange={handleChange}
               />
             </Box>
-            <Box sx={{ mt: 3 }}>
-              <Typography variant="caption">Username</Typography>
+            <Box sx={{ mt: 3, "& p": { textAlign: "right" } }}>
+              <Typography variant="caption">اسم المستخدم</Typography>
               <TextField
                 name="username"
                 value={data.username}
                 required
                 color="primary"
-                helperText="* Username can only be changed once per 7 days"
+                helperText="* يمكن تغيير اسم المستخدم مرة واحدة خلال 7 ايام"
                 onChange={handleChange}
                 //   margin="normal"
               />
             </Box>{" "}
             <Box sx={{ mt: 3 }}>
-              <Typography variant="caption">Email</Typography>
+              <Typography variant="caption">البريد الالكتروني</Typography>
               <TextField name="email" value={data.email} disabled />
             </Box>
             <Button
@@ -252,7 +253,7 @@ const Settings = ({ authedUser, host }) => {
               sx={{ my: 4, width: "fit-content" }}
               variant="contained"
             >
-              Save
+              حفظ
             </Button>
           </Box>
         </Box>
@@ -269,13 +270,13 @@ const Settings = ({ authedUser, host }) => {
         >
           <Box>
             <Typography sx={{ fontWeight: 500 }} variant="subtitle1">
-              Password
+              كلمة المرور
             </Typography>
             <Typography
               sx={{ fontWeight: 100, color: theme.palette.grey.dark }}
               variant="subtitle2"
             >
-              Set a unique password to protect your personal account.
+              قم باستخدام كلمة مرور فريدة للحفاظ على امان حسابك
             </Typography>
           </Box>
           <Button
@@ -286,7 +287,7 @@ const Settings = ({ authedUser, host }) => {
             color="black"
             variant="outlined"
           >
-            Change Password
+            تغيير كلمة المرور
           </Button>
         </Box>
       </Box>

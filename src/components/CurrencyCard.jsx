@@ -70,7 +70,7 @@ const CurrencyCard = ({ sympol }) => {
             sx={{
               flex: "1 0 auto",
               padding: "0 1rem !important",
-              textAlign: "left",
+              textAlign: "right",
             }}
           >
             <Typography component="div" variant="subtitle2">
@@ -81,7 +81,7 @@ const CurrencyCard = ({ sympol }) => {
               color="text.secondary"
               component="div"
             >
-              {sympol.name}
+              {sympol.ar_name}
             </Typography>
             {/* <IconButton aria-label="previous">
               <FavoriteRoundedIcon />

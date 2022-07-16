@@ -18,7 +18,7 @@ const FaceBookLogin = () => {
       // icon={<FacebookOutlinedIcon />}
       render={(renderProps) => (
         <Button
-          startIcon={<FacebookOutlinedIcon />}
+          startIcon={<FacebookOutlinedIcon style={{ marginLeft: "0.5rem" }} />}
           sx={{ my: 1.5 }}
           fullWidth
           size="large"
@@ -26,7 +26,7 @@ const FaceBookLogin = () => {
           variant="contained"
           onClick={renderProps.onClick}
         >
-          Continue with facebook
+          المتابعة بحساب فيس بوك
         </Button>
       )}
     />

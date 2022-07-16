@@ -37,9 +37,17 @@ import { RiLogoutCircleRLine, RiLoginCircleLine } from "react-icons/ri";
 import { MdManageAccounts, MdNoAccounts } from "react-icons/md";
 import { ListItem } from "@mui/material";
 
-const pages = ["currencies", "calculator", "watchlist"];
-const settings = ["settings", "watchlist", "logout"];
-
+const pages = ["العملات", "الحاسبة", "المفضلة"];
+const settings = ["اعدادات الحساب", "المفضلة", "تسجيل الخروج"];
+const pagesPaths = {
+  العملات: "currencies",
+  المفضلة: "watchlist",
+};
+const settingsPaths = {
+  "اعدادات الحساب": "settings",
+  المفضلة: "watchlist",
+  "تسجيل الخروج": "logout",
+};
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -67,6 +75,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   fontSize: "0.8em",
+  left: 0,
   "& .MuiSvgIcon-root": { color: theme.palette.grey.dark },
 }));
 
@@ -121,6 +130,7 @@ const Navbar = (props) => {
           borderRight: "none",
           borderLeft: "nonde",
           boxShadow: "none",
+          direction: "rtl",
           py: 1.5,
           color: palette.black.main,
           "& .MuiButton-root": {
@@ -180,7 +190,7 @@ const Navbar = (props) => {
                 variant="h6"
                 noWrap
                 sx={{
-                  mr: 2,
+                  ml: 2,
                   display: { xs: "none", md: "flex" },
                   fontFamily: "monospace",
                   fontWeight: 700,
@@ -214,12 +224,12 @@ const Navbar = (props) => {
             </Link>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => {
-                if (page !== "calculator") {
+                if (page !== "الحاسبة") {
                   return (
                     <Link
                       key={page}
                       style={{ textDecoration: "none" }}
-                      to={`/${page}`}
+                      to={`/${pagesPaths[page]}`}
                     >
                       <Button
                         sx={{
@@ -304,7 +314,7 @@ const Navbar = (props) => {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <Link key={setting} to={`/${setting}`}>
+                    <Link key={setting} to={`/${settingsPaths[setting]}`}>
                       <MenuItem onClick={handleCloseUserMenu}>
                         <Typography textAlign="center">{setting}</Typography>
                       </MenuItem>
@@ -320,7 +330,7 @@ const Navbar = (props) => {
                     Store.dispatch(authInfo({ com: "login", state: "open" }))
                   }
                 >
-                  Log in
+                  دخول
                 </Button>
                 <Button
                   className="signup"
@@ -331,7 +341,7 @@ const Navbar = (props) => {
                   color="primary"
                   variant="contained"
                 >
-                  Sign up
+                  تسجيل
                 </Button>
               </Box>
             )}
@@ -340,7 +350,7 @@ const Navbar = (props) => {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder="البحث..."
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
@@ -478,7 +488,7 @@ const Navbar = (props) => {
           aria-labelledby="nested-list-subheader"
           subheader={
             <ListSubheader component="div" id="nested-list-subheader">
-              Go to
+              اذهب الى..
             </ListSubheader>
           }
         >
@@ -509,19 +519,19 @@ const Navbar = (props) => {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder="البحث..."
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
           </ListItem>
           {pages.map((page, ind) => {
-            return page !== "calculator" ? (
-              <Link key={ind} to={`/${page}`}>
+            return page !== "الحاسبة" ? (
+              <Link key={ind} to={`/${pagesPaths[page]}`}>
                 <ListItemButton>
                   <ListItemIcon>
-                    {page === "currencies" ? (
+                    {page === "العملات" ? (
                       <GrCurrency />
-                    ) : page === "calculator" ? (
+                    ) : page === "الحاسبة" ? (
                       <ImCalculator />
                     ) : (
                       <BsStarFill />
@@ -538,9 +548,9 @@ const Navbar = (props) => {
                 }
               >
                 <ListItemIcon>
-                  {page === "currencies" ? (
+                  {page === "العملات" ? (
                     <GrCurrency />
-                  ) : page === "calculator" ? (
+                  ) : page === "الحاسبة" ? (
                     <ImCalculator />
                   ) : (
                     <BsStarFill />
@@ -570,12 +580,12 @@ const Navbar = (props) => {
               <Collapse in={userMenu} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   {settings.map((setting, ind) => {
-                    if (setting !== "watchlist")
+                    if (setting !== "المفضلة")
                       return (
-                        <Link key={ind} to={`/${setting}`}>
+                        <Link key={ind} to={`/${settingsPaths[setting]}`}>
                           <ListItemButton sx={{ pl: 4 }}>
                             <ListItemIcon>
-                              {setting === "logout" ? (
+                              {setting === "تسجيل الخروج" ? (
                                 <RiLogoutCircleRLine />
                               ) : (
                                 <MdManageAccounts />
@@ -595,14 +605,14 @@ const Navbar = (props) => {
                 <ListItemIcon>
                   <RiLoginCircleLine />
                 </ListItemIcon>
-                <ListItemText primary={"Log in"} />
+                <ListItemText primary={"دخول"} />
               </ListItemButton>
 
               <ListItemButton>
                 <ListItemIcon>
                   <MdNoAccounts />
                 </ListItemIcon>
-                <ListItemText primary={"Sign up"} />
+                <ListItemText primary={"تسجيل"} />
               </ListItemButton>
             </>
           )}

@@ -15,7 +15,7 @@ const GooGleLogin = () => {
       render={(renderProps) => (
         <Button
           sx={{ my: 1.5 }}
-          startIcon={<FcGoogle />}
+          startIcon={<FcGoogle style={{ marginLeft: "0.5rem" }} />}
           fullWidth
           variant="contained"
           size="large"
@@ -23,7 +23,7 @@ const GooGleLogin = () => {
           onClick={renderProps.onClick}
           disabled={renderProps.disabled}
         >
-          Continue with google
+          المتابعة بحساب جوجل
         </Button>
       )}
       buttonText="Login"

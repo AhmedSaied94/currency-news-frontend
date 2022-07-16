@@ -89,6 +89,7 @@ const CurrenciesDialog = ({ changeCur, sympols, authedUser }) => {
   return (
     <Box>
       <BootstrapDialog
+        sx={{ direction: "rtl" }}
         onClose={() =>
           Store.dispatch(authInfo({ com: "changeCur", state: "close" }))
         }

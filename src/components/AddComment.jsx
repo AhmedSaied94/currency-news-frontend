@@ -39,7 +39,7 @@ const AddComment = ({ newsId, authedUser }) => {
       JSON.stringify(data)
     );
     Store.dispatch(createComment({ comment: res.data }));
-    enqueueSnackbar("comment added successfully", {
+    enqueueSnackbar("تم اضافة تعليقك بنجاح", {
       variant: "success",
       anchorOrigin: {
         vertical: "bottom",
@@ -97,7 +97,7 @@ const AddComment = ({ newsId, authedUser }) => {
               },
             }}
           >
-            Add comment
+            اضافة تعليق
           </LoadingButton>
         </Box>
       )}

@@ -12,9 +12,10 @@ import Store from "../Store";
 import { useCookies } from "react-cookie";
 import { axiosFetchInstance } from "../Axios";
 import { authInfo } from "../slices/Constants";
-import {Box} from '@mui/system'
-import {Link} from 'react-router-dom'
-import {Avatar} from '@mui/material'
+import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
+import { Avatar } from "@mui/material";
+import HomeChips from "./HomeChips";
 
 const Metals = ({ type, authedUser, geoData, metals }) => {
   const [cookies] = useCookies(["currency_news"]);
@@ -80,7 +81,25 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
       ],
       Silver: ["999 carat", "925 carat", "800 carat", "ounce"],
     };
-
+    const arCarats = {
+      Gold: {
+        "24 carat": "عيار 24",
+        "21 carat": "عيار 21",
+        "18 carat": "عيار 18",
+        "14 carat": "عيار 14",
+        "5G ingot": "سبيكة 5جم",
+        "100 G ingot": "سبيكة 100جم",
+        "250 G ingot": "سبيكة 250جم",
+        "1 Kg ingot": "سبيكة 1كجم",
+        ounce: "اوقية",
+      },
+      Silver: {
+        "999 carat": "عيار 999",
+        "925 carat": "عيار 925",
+        "800 carat": "عيار 800",
+        ounce: "اوقية",
+      },
+    };
     let counter = 1;
     const sympol =
       authedUser && authedUser.home_currency
@@ -93,8 +112,8 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
         value =
           carat === "ounce"
             ? price
-            :carat.indexOf('Kg') > 0
-            ? price / 31.1 * 1000
+            : carat.indexOf("Kg") > 0
+            ? (price / 31.1) * 1000
             : carat.indexOf("ingot") > 0
             ? (carat
                 .split("")
@@ -133,12 +152,18 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
             Rows[arrayName].push({
               "#": carats[metal.name].indexOf(carat) + 1,
               id: metal.id + carat,
-              carat: {carat, name:metal.name, sympol:metal.sympol},
+              carat: {
+                carat: arCarats[metal.name][carat],
+                name: metal.ar_name,
+                sympol: metal.sympol,
+              },
               price: `${
                 Math.round((current + Number.EPSILON) * 100) / 100
               } ${sympol}`,
               sellPrice: `${
-                Math.round((current + metal.profit_margin + Number.EPSILON) * 100) / 100
+                Math.round(
+                  (current + metal.profit_margin + Number.EPSILON) * 100
+                ) / 100
               } ${sympol}`,
               "24h":
                 Math.round(
@@ -158,13 +183,18 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
           Rows.OtherRows.push({
             "#": counter,
             id: metal.id,
-            carat: {carat:'', name:metal.name, sympol:metal.sympol},
+            carat: { carat: "", name: metal.ar_name, sympol: metal.sympol },
             price:
               Math.round((metal.home_value / 31.1 + Number.EPSILON) * 100) /
                 100 +
               ` ${sympol}`,
             sellPrice:
-              Math.round((metal.home_value / 31.1 + metal.profit_margin + Number.EPSILON) * 100) /
+              Math.round(
+                (metal.home_value / 31.1 +
+                  metal.profit_margin +
+                  Number.EPSILON) *
+                  100
+              ) /
                 100 +
               ` ${sympol}`,
             "24h":
@@ -226,12 +256,12 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
     },
     {
       field: "carat",
-      headerName: "carat",
+      headerName: "العيار",
       width: 250,
       align: "center",
       headerAlign: "center",
       renderCell: (values) => {
-        const metalName = values.value.name
+        const metalName = values.value.name;
         return (
           <Box
             sx={{
@@ -254,10 +284,13 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
               <Avatar
                 sx={{ width: 30, height: 30 }}
                 src={
-                  metalName === 'Gold'? '/gold.jpg'
-                  :metalName === 'Silver'? '/silver.png'
-                  :metalName === 'Palladium'? '/palladium.jpg'
-                  :'/platinum.jpg'
+                  metalName === "Gold"
+                    ? "/gold.jpg"
+                    : metalName === "Silver"
+                    ? "/silver.png"
+                    : metalName === "Palladium"
+                    ? "/palladium.jpg"
+                    : "/platinum.jpg"
                 }
               />
             </Link>
@@ -268,7 +301,9 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
                   margin: "0 0.5rem",
                 }}
               >
-                {values.value.name} {values.value.carat}
+                {values.value.carat !== "اوقية"
+                  ? `${values.value.name} ${values.value.carat}`
+                  : `${values.value.carat} ${values.value.name}`}
               </p>
             </Link>
             <Link to={`/currency?sympol=${values.value.sympol}`}>
@@ -283,28 +318,28 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
     },
     {
       field: "price",
-      headerName: "Price",
+      headerName: "السعر",
       width: 136,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "sellPrice",
-      headerName: "Sell Price",
+      headerName: "سعر البيع",
       width: 136,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "lastClose",
-      headerName: "Last Close",
+      headerName: "سعر الاغلاق",
       width: 136,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "24h",
-      headerName: "24h",
+      headerName: "متوسط الامس",
       width: 136,
       align: "center",
       headerAlign: "center",
@@ -312,7 +347,7 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
     },
     {
       field: "7d",
-      headerName: "7d",
+      headerName: "متوسطع الاسبوع",
       width: 136,
       align: "center",
       headerAlign: "center",
@@ -320,7 +355,7 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
     },
     {
       field: "last7chart",
-      headerName: "Last 7 Chart",
+      headerName: "الحركة البيانية لاخر اسبوع",
       width: 280,
       align: "center",
       headerAlign: "center",
@@ -355,8 +390,11 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
                 style={{
                   height: metal.name === "Gold" ? 800 : 400,
                   margin: "1rem",
+                  marginTop: "10rem",
+                  direction: "rtl",
                 }}
               >
+                <HomeChips />
                 <DataGrid
                   rowHeight={80}
                   rows={metal.name === "Gold" ? rows.GoldRows : rows.SilverRows}
@@ -369,7 +407,15 @@ const Metals = ({ type, authedUser, geoData, metals }) => {
           }
         })}
       {metals && (
-        <div style={{ height: 240, margin: "1rem" }}>
+        <div
+          style={{
+            height: 240,
+            margin: "1rem",
+            direction: "rtl",
+            marginTop: "10rem",
+          }}
+        >
+          <HomeChips />
           <DataGrid
             rowHeight={80}
             rows={rows.OtherRows}

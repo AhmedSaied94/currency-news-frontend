@@ -51,7 +51,7 @@ const BootstrapDialogTitle = (props) => {
           onClick={onClose}
           sx={{
             position: "absolute",
-            right: 8,
+            left: 8,
             top: 8,
             color: (theme) => theme.palette.grey[500],
           }}
@@ -88,6 +88,7 @@ const Calculator = ({ sympols, calculator }) => {
   return (
     <Box>
       <BootstrapDialog
+        sx={{ direction: "rtl" }}
         onClose={() =>
           Store.dispatch(authInfo({ com: "calculator", state: "close" }))
         }
@@ -101,7 +102,7 @@ const Calculator = ({ sympols, calculator }) => {
             Store.dispatch(authInfo({ com: "calculator", state: "close" }))
           }
         >
-          Currency calculator
+          حاسبة العملة
         </BootstrapDialogTitle>
         <DialogContent>
           <Box
@@ -148,13 +149,13 @@ const Calculator = ({ sympols, calculator }) => {
             <Box sx={{ mt: 3 }}>
               {/* <Typography variant="caption">Base currency</Typography> */}
               <InputLabel id="demo-simple-select-label">
-                Base currency
+                العملة الاساس
               </InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="calcSelect"
                 value={data.first_currency}
-                label="Base currency"
+                // label="العملة الاساس"
                 color="primary"
                 onChange={(e) =>
                   setData({ ...data, first_currency: e.target.value })
@@ -162,20 +163,24 @@ const Calculator = ({ sympols, calculator }) => {
               >
                 {sympols.length > 0 &&
                   sympols.map((cur) => {
-                    return <MenuItem key={cur.sympol} value={cur.sympol}>{cur.name}</MenuItem>;
+                    return (
+                      <MenuItem key={cur.sympol} value={cur.sympol}>
+                        {cur.ar_name}
+                      </MenuItem>
+                    );
                   })}
               </Select>
             </Box>
             <Box sx={{ mt: 3 }}>
               {/* <Typography variant="caption">Home currency</Typography> */}
-              <InputLabel id="demo-simple-select-label">
-                Home currency
+              <InputLabel id="demo-simple-select-label2">
+                العملة المحلية
               </InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="calcSelect"
+                labelId="demo-simple-select-label2"
+                id="calcSelect2"
                 value={data.second_currency}
-                label="Home currency"
+                // label="العملة المحلية"
                 color="primary"
                 onChange={(e) =>
                   setData({ ...data, second_currency: e.target.value })
@@ -183,12 +188,16 @@ const Calculator = ({ sympols, calculator }) => {
               >
                 {sympols.length > 0 &&
                   sympols.map((cur) => {
-                    return <MenuItem key={cur.sympol} value={cur.sympol}>{cur.name}</MenuItem>;
+                    return (
+                      <MenuItem key={cur.sympol} value={cur.sympol}>
+                        {cur.ar_name}
+                      </MenuItem>
+                    );
                   })}
               </Select>
             </Box>
             <Box sx={{ mt: 3 }}>
-              <InputLabel id="demo-simple-select-label">Amount</InputLabel>
+              <InputLabel id="demo-simple-select-label">القيمة</InputLabel>
               <TextField
                 name="amount"
                 value={data.amount}
@@ -199,7 +208,7 @@ const Calculator = ({ sympols, calculator }) => {
               />
             </Box>
             <Box sx={{ mt: 3 }}>
-              <InputLabel id="demo-simple-select-label">Result</InputLabel>
+              <InputLabel id="demo-simple-select-label">الناتج</InputLabel>
               <TextField
                 name="result"
                 value={result}
@@ -230,7 +239,7 @@ const Calculator = ({ sympols, calculator }) => {
             variant="contained"
             loading={loading}
           >
-            Calculate
+            احسب
           </LoadingButton>
         </DialogActions>
       </BootstrapDialog>

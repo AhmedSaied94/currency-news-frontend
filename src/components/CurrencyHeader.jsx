@@ -43,16 +43,18 @@ const CurrencyHeader = ({ currency, homeValue, base, authedUser }) => {
         }}
       >
         <Avatar
-          src={currency.currency_type !== 'Metals'?
-            `https://countryflagsapi.com/svg/${currency.sympol
-            .substring(0, 2)
-            .toLowerCase()}`
-            :currency.name === 'Silver'? '/silver.png'
-            : `/${currency.name.toLowerCase()}.jpg`
+          src={
+            currency.currency_type !== "Metals"
+              ? `https://countryflagsapi.com/svg/${currency.sympol
+                  .substring(0, 2)
+                  .toLowerCase()}`
+              : currency.name === "Silver"
+              ? "/silver.png"
+              : `/${currency.name.toLowerCase()}.jpg`
           }
         />
         <Typography sx={{ mx: 2, fontWeight: 500 }} component="h6" variant="h4">
-          {currency.name}
+          {currency.ar_name}
         </Typography>
         <Chip
           sx={{
@@ -89,24 +91,24 @@ const CurrencyHeader = ({ currency, homeValue, base, authedUser }) => {
       </Box>
       <Box>
         <Typography
-          textAlign="right"
+          textAlign="left"
           sx={{
             fontSize: "0.8em",
             color: theme.palette.grey.dark,
             fontWeight: 400,
           }}
         >
-          {currency.name} ({currency.sympol})
+          {currency.ar_name} ({currency.sympol})
         </Typography>
 
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
           <Typography
             textAlign="right"
             sx={{ mx: 2, fontWeight: 500 }}
             component="h6"
             variant="h4"
           >
-            {currency.currency_type !== 'Normal Currency'
+            {currency.currency_type !== "Normal Currency"
               ? currency.home_value
               : `${base} = ${currency.home_value}`}
           </Typography>
@@ -127,9 +129,18 @@ const CurrencyHeader = ({ currency, homeValue, base, authedUser }) => {
             size="large"
             label={
               Math.round(
-                ((currency.home_value.substring(0, currency.home_value.length-4) -
-                  currency.close_price.substring(0, currency.close_price.length-4)) /
-                  currency.close_price.substring(0, currency.close_price.length-4) +
+                ((currency.home_value.substring(
+                  0,
+                  currency.home_value.length - 4
+                ) -
+                  currency.close_price.substring(
+                    0,
+                    currency.close_price.length - 4
+                  )) /
+                  currency.close_price.substring(
+                    0,
+                    currency.close_price.length - 4
+                  ) +
                   Number.EPSILON) *
                   1000
               ) /

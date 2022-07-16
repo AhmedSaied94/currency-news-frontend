@@ -29,7 +29,7 @@ const BasesChips = ({ setBase, currency, base, bases }) => {
                 clickable
                 onClick={() => setBase(cur.sympol)}
                 size="small"
-                label={cur.name}
+                label={cur.ar_name}
               />
             );
           })}

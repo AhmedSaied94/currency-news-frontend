@@ -131,28 +131,30 @@ function App({ authedUser, geoData }) {
   }, []);
 
   return (
-    <div className="App" style={largeScreens ? { padding: "0 5rem" } : {}}>
+    <div className="App">
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           {geoData.currency && <Navbar />}
-          <Login />
-          <Signup />
-          <ResetPassword />
-          <CurrenciesDialog />
-          <Calculator />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/currency" element={<Currency />} />
-            <Route path="/currencies" element={<Currencies />} />
-            <Route path="/news/*" element={<News />} />
-            <Route
-              path="/logout"
-              element={<Logout path={window.location.href} />}
-            />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/reset-password" element={<ResetConfirm />} />
-          </Routes>
+          <div style={largeScreens ? { padding: "0 5rem" } : {}}>
+            <Login />
+            <Signup />
+            <ResetPassword />
+            <CurrenciesDialog />
+            <Calculator />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/currency" element={<Currency />} />
+              <Route path="/currencies" element={<Currencies />} />
+              <Route path="/news/*" element={<News />} />
+              <Route
+                path="/logout"
+                element={<Logout path={window.location.href} />}
+              />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/reset-password" element={<ResetConfirm />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </ThemeProvider>
     </div>

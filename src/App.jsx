@@ -29,6 +29,7 @@ function App({ authedUser, geoData }) {
   const [cookies, setCookie, removeCookie] = useCookies(["currency_news"]);
   const [signCom, setSignCom] = React.useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const largeScreens = useMediaQuery(theme.breakpoints.up("xl"));
 
   React.useEffect(() => {
     const userGeo = async () => {
@@ -129,7 +130,7 @@ function App({ authedUser, geoData }) {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={largeScreens ? { padding: "0 5rem" } : {}}>
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <BrowserRouter>

@@ -44,7 +44,7 @@ const BootstrapDialogTitle = (props) => {
           onClick={onClose}
           sx={{
             position: "absolute",
-            right: 8,
+            left: 8,
             top: 8,
             color: (theme) => theme.palette.grey[500],
           }}
@@ -150,6 +150,7 @@ const Signup = (props) => {
         open={props.signup}
         fullScreen={fullScreen}
         sx={{
+          direction: "rtl",
           "& .MuiDialog-container": {
             overflowY: "auto",
           },
@@ -168,7 +169,7 @@ const Signup = (props) => {
             Store.dispatch(authInfo({ com: "signup", state: "close" }))
           }
         >
-          Please fill the form to sign up
+          حساب جديد
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Box
@@ -192,7 +193,7 @@ const Signup = (props) => {
               fullWidth
               name="username"
               value={data.username}
-              label="Username"
+              label="اسم المستخدم"
               required
               color="sky"
               onChange={handleData}
@@ -202,7 +203,7 @@ const Signup = (props) => {
               fullWidth
               name="email"
               value={data.email}
-              label="Email"
+              label="البريد الالكتروني"
               required
               type="email"
               color="sky"
@@ -214,7 +215,7 @@ const Signup = (props) => {
               fullWidth
               name="fullname"
               value={data.fullname}
-              label="Full Name"
+              label="الاسم بالكامل"
               required
               color="sky"
               onChange={handleData}
@@ -225,7 +226,7 @@ const Signup = (props) => {
               fullWidth
               name="password"
               value={data.password}
-              label="Password"
+              label="كلمة المرور"
               required
               type="password"
               color="sky"
@@ -239,7 +240,7 @@ const Signup = (props) => {
               fullWidth
               name="password2"
               value={data.password2}
-              label="Password Again"
+              label="تاكيد كلمة المرور"
               required
               type="password"
               color="sky"
@@ -258,9 +259,9 @@ const Signup = (props) => {
               loading={loading}
               onClick={onFinish}
             >
-              Sign up
+              سجل الان
             </LoadingButton>
-            <Typography variant="h6">OR</Typography>
+            <Typography variant="h6">او</Typography>
             <FaceBookLogin />
             <GooGleLogin />
             <Typography
@@ -276,7 +277,7 @@ const Signup = (props) => {
               }}
               variant="subtitle2"
             >
-              Have an account? login here
+              لديك حساب بالفعل؟ سجل الدخول من هنا
             </Typography>
           </Box>
         </DialogContent>

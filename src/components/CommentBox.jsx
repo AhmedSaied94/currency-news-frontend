@@ -31,7 +31,7 @@ const CommentBox = ({ comments, host, authedUser }) => {
 
   return (
     <div style={{ padding: 14 }} className="App">
-      <h1>Comments</h1>
+      <h1>التعليقات</h1>
       <Paper style={{ padding: "40px 20px" }}>
         {comments.map((comment, inx) => {
           return (
@@ -45,16 +45,16 @@ const CommentBox = ({ comments, host, authedUser }) => {
                 </Grid>
                 <Grid
                   sx={{ position: "relative" }}
-                  justifyContent="right"
+                  justifyContent="flex-end"
                   item
                   xs
                   zeroMinWidth
                 >
-                  <h4 style={{ margin: 0, textAlign: "left" }}>
+                  <h4 style={{ margin: 0, textAlign: "right" }}>
                     {comment.userdata.fullname}
                   </h4>
-                  <p style={{ textAlign: "left" }}>{comment.content}</p>
-                  <p style={{ textAlign: "left", color: "gray" }}>
+                  <p style={{ textAlign: "right" }}>{comment.content}</p>
+                  <p style={{ textAlign: "right", color: "gray" }}>
                     {comment.customDate}
                   </p>
                   {authedUser && authedUser.id === comment.user && (
@@ -62,7 +62,7 @@ const CommentBox = ({ comments, host, authedUser }) => {
                       sx={{
                         position: "absolute",
                         top: "0.1rem",
-                        right: "0.1rem",
+                        left: "0.1rem",
                       }}
                       onClick={() => {
                         deleteCom(comment.id).catch((err) => {

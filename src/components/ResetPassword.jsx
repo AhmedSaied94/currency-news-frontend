@@ -45,7 +45,7 @@ const BootstrapDialogTitle = (props) => {
           onClick={onClose}
           sx={{
             position: "absolute",
-            right: 8,
+            left: 8,
             top: 8,
             color: (theme) => theme.palette.grey[500],
           }}
@@ -86,6 +86,7 @@ const ResetPassword = (props) => {
   return (
     <Box>
       <BootstrapDialog
+        sx={{ direction: "rtl" }}
         onClose={() =>
           Store.dispatch(authInfo({ com: "reset", state: "close" }))
         }
@@ -99,7 +100,7 @@ const ResetPassword = (props) => {
             Store.dispatch(authInfo({ com: "reset", state: "close" }))
           }
         >
-          {resetView ? "Reset Password" : ""}
+          {resetView ? "اعادة تعيين كلمة المرور" : ""}
         </BootstrapDialogTitle>
         {resetView ? (
           <>
@@ -109,9 +110,12 @@ const ResetPassword = (props) => {
                 variant="subtitle2"
                 component="p"
               >
-                You will receive an email with instructions on how to reset your
+                {/* You will receive an email with instructions on how to reset your
                 password in a few minutes. You can also set a new password if
-                you’ve never set one before.
+                you’ve never set one before. */}
+                ستقوم باستلام رسالة بريد الكتروني في خلال دقائق يحتوي على
+                تعليمات كيفية اعادة تعيين كلمة المرور. يمكنك ايضا تعيين كلمة
+                مرور لو لم تكن قمت بذلك من قبل
               </Typography>
               <Box
                 sx={{
@@ -130,7 +134,7 @@ const ResetPassword = (props) => {
                 }}
               >
                 <Typography sx={{ fontWeight: 500 }} variant="caption">
-                  Email
+                  البريد الالكتروني
                 </Typography>
                 <TextField
                   type="email"
@@ -162,7 +166,7 @@ const ResetPassword = (props) => {
                 variant="contained"
                 fullWidth
               >
-                Reset password
+                اعادة تعيين كلمة المرور
               </Button>
             </DialogActions>
           </>
@@ -211,14 +215,14 @@ const ResetPassword = (props) => {
                 }}
               >
                 <Typography sx={{ fontWeight: 700 }} variant="h5">
-                  Check your email
+                  قم بتفقد بريدك الالكتروني
                 </Typography>
                 <Typography
                   sx={{ fontWeight: 500, color: theme.palette.grey.dark }}
                   variant="subtitle2"
                   component="p"
                 >
-                  An email has been sent to{" "}
+                  لقد قمنا بارسال رسالة بريد الكتروني الى{" "}
                   <Typography
                     sx={{ color: "#000", fontWeight: 700 }}
                     variant="subtitle1"
@@ -226,11 +230,12 @@ const ResetPassword = (props) => {
                   >
                     {email}
                   </Typography>{" "}
-                  with instructions to reset your password.
+                  بها تعليمات كيفية اعادة تعيين كلمة المرور.
                 </Typography>
                 <Typography sx={{ fontWeight: 300, mt: 3 }} variant="subtitle2">
-                  * If the email doesn’t show up soon, check your spam folder or
-                  make sure you enter the email you used for registration.
+                  * اذا لم تظهر الرسالة قريبا تحقق من مجلد الرسائل غير المرغوب
+                  فيها او تاكد من انك قمت بادخال البريد الالكتروني الذي قمت
+                  باستخدامه اثناء عملية التسجيل
                 </Typography>
               </Box>
             </DialogContent>

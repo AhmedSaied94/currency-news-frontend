@@ -60,7 +60,7 @@ const News = ({ news, authedUser }) => {
   return (
     <>
       {news && (
-        <Grid sx={{ my: 7 }} container spacing={2}>
+        <Grid sx={{ my: 7, direction: "rtl" }} container spacing={2}>
           <Grid
             sx={{
               display: "flex",

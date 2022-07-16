@@ -9,6 +9,7 @@ const Currencies = ({ sympols }) => {
   return (
     <Box
       sx={{
+        direction: "rtl",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",

@@ -36,14 +36,14 @@ const CurLowHigh = ({ currency }) => {
         <ListItem>
           <ListItemText
             primary={currency.close_price}
-            secondary="Prev. close"
+            secondary="سعر اغلاق امس"
           />
         </ListItem>
         <ListItem>
           <ListItemText
-            sx={{ textAlign: "right" }}
+            sx={{ textAlign: "left" }}
             primary={currency.open_price}
-            secondary="Open"
+            secondary="سعر افتتاح امس"
           />
         </ListItem>
       </Box>
@@ -58,14 +58,14 @@ const CurLowHigh = ({ currency }) => {
         <ListItem>
           <ListItemText
             primary={currency.day_low_high.low}
-            secondary="Day low"
+            secondary="اقل قيمة خلال اليوم"
           />
         </ListItem>
         <ListItem>
           <ListItemText
-            sx={{ textAlign: "right" }}
+            sx={{ textAlign: "left" }}
             primary={currency.day_low_high.high}
-            secondary="Day high"
+            secondary="اعلى قيمة خلال اليوم"
           />
         </ListItem>
       </Box>
@@ -80,14 +80,14 @@ const CurLowHigh = ({ currency }) => {
         <ListItem>
           <ListItemText
             primary={currency.last7_low_high.low}
-            secondary="Week low"
+            secondary="اقل قيمة خلال الاسبوع"
           />
         </ListItem>
         <ListItem>
           <ListItemText
-            sx={{ textAlign: "right" }}
+            sx={{ textAlign: "left" }}
             primary={currency.last7_low_high.high}
-            secondary="Week high"
+            secondary="اعلى قيمة خلال الاسبوع"
           />
         </ListItem>
       </Box>

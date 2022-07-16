@@ -56,10 +56,10 @@ const Currency = ({ currency, geoData, authedUser }) => {
 
   const breadcrumbs = [
     <Link underline="hover" key="1" color="inherit" href="/">
-      Home
+      الرئيسية
     </Link>,
     <Link underline="hover" key="2" color="inherit" href="/currencies">
-      Currencies
+      العملات
     </Link>,
     <Typography
       sx={{ fontSize: "1em", fontWeight: 500 }}
@@ -73,7 +73,7 @@ const Currency = ({ currency, geoData, authedUser }) => {
   return (
     <>
       {currency ? (
-        <Box>
+        <Box sx={{ direction: "rtl" }}>
           <Box
             sx={{
               backgroundColor: "#f8fafd",
@@ -90,18 +90,17 @@ const Currency = ({ currency, geoData, authedUser }) => {
             <CurrencyHeader base={base} currency={currency} />
           </Box>
 
-          {currency.currency_type === 'Normal Currency' && (
+          {currency.currency_type === "Normal Currency" && (
             <BasesChips base={base} currency={currency} setBase={setBase} />
           )}
           <Grid sx={{ p: 2 }} container spacing={2}>
             <Grid item xs={12} md={8}>
-              <Box sx={{ my: 3, px: 2 }} textAlign="left">
+              <Box sx={{ my: 3, px: 2 }} textAlign="right">
                 <Typography variant="h6">
-                  {currency.currency_type !== 'Normal Currency'?
-                    `${currency.sympol} To ${authedUser? authedUser.home_currency : geoData.currency}`
-                  :
-                  `${base} To ${currency.sympol} Chart`
-                }
+                  {/* {currency.sympol} To {base} Chart */}
+                  {currency.currency_type !== "Normal Currency"
+                    ? `التدفق البياني بين ${currency.sympol} و ${geoData.currency}`
+                    : `التدفق البياني بين ${currency.sympol} و ${base}`}
                 </Typography>
               </Box>
               <Area />
@@ -116,7 +115,7 @@ const Currency = ({ currency, geoData, authedUser }) => {
             </Grid>
             <Grid item xs={12} md={4}>
               <Box sx={{ my: 2, px: 2 }} textAlign="left">
-                <Typography variant="h6">Last Tweets</Typography>
+                <Typography variant="h6">اخر التغريدات</Typography>
               </Box>
               <Tweets tweets={currency.tweets} />
             </Grid>
@@ -136,7 +135,7 @@ const Currency = ({ currency, geoData, authedUser }) => {
 const mapStateToProps = (state) => {
   const { currency } = state.allCurrencies;
   const { geoData } = state.constants;
-  const {authedUser} = state.user
+  const { authedUser } = state.user;
   return { currency, geoData, authedUser };
 };
 

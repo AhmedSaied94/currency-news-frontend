@@ -15,6 +15,7 @@ import Store from "../Store";
 import { useCookies } from "react-cookie";
 import { axiosFetchInstance } from "../Axios";
 import { authInfo } from "../slices/Constants";
+import HomeChips from "./HomeChips";
 
 const BasesTable = ({ bases, authedUser, geoData }) => {
   const [fav, setFav] = React.useState(false);
@@ -75,12 +76,14 @@ const BasesTable = ({ bases, authedUser, geoData }) => {
         rows.push({
           "#": bases.indexOf(base),
           id: base.id,
-          name: { name: base.name, sympol: base.sympol },
+          name: { name: base.ar_name, sympol: base.sympol },
           price: `${
             Math.round((base.home_value + Number.EPSILON) * 100) / 100
           } ${sympol}`,
-          sellPrice:`${
-            Math.round((base.home_value + base.profit_margin + Number.EPSILON) * 100) / 100
+          sellPrice: `${
+            Math.round(
+              (base.home_value + base.profit_margin + Number.EPSILON) * 100
+            ) / 100
           } ${sympol}`,
           "24h": Math.round((h24 + Number.EPSILON) * 100) / 100,
           "7d": -2.5,
@@ -132,7 +135,7 @@ const BasesTable = ({ bases, authedUser, geoData }) => {
     },
     {
       field: "name",
-      headerName: "Name",
+      headerName: "العملة",
       width: 250,
       align: "left",
       headerAlign: "left",
@@ -185,28 +188,28 @@ const BasesTable = ({ bases, authedUser, geoData }) => {
     },
     {
       field: "price",
-      headerName: "Price",
+      headerName: "السعر",
       width: 136,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "sellPrice",
-      headerName: "Sell Price",
+      headerName: "سعر البيع",
       width: 136,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "lastClose",
-      headerName: "Last Close",
+      headerName: "سعر الاغلاق",
       width: 136,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "24h",
-      headerName: "24h",
+      headerName: "متوسط الامس",
       width: 136,
       align: "center",
       headerAlign: "center",
@@ -214,7 +217,7 @@ const BasesTable = ({ bases, authedUser, geoData }) => {
     },
     {
       field: "7d",
-      headerName: "7d",
+      headerName: "متوسط الاسبوع",
       width: 136,
       align: "center",
       headerAlign: "center",
@@ -222,7 +225,7 @@ const BasesTable = ({ bases, authedUser, geoData }) => {
     },
     {
       field: "last7chart",
-      headerName: "Last 7 Chart",
+      headerName: "الحركة البيانية لاخر اسبوع",
       width: 280,
       align: "center",
       headerAlign: "center",
@@ -233,7 +236,12 @@ const BasesTable = ({ bases, authedUser, geoData }) => {
             : theme.palette.down;
         return (
           <Sparklines
-            style={{ width: "100%", height: "100%", padding: "5px" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              padding: "5px",
+              direction: "rtl",
+            }}
             data={values.value}
           >
             <SparklinesLine style={{ strokeWidth: 1.5 }} color={color} />
@@ -247,7 +255,8 @@ const BasesTable = ({ bases, authedUser, geoData }) => {
     },
   ];
   return (
-    <div style={{ height: 1040, margin: "1rem" }}>
+    <div style={{ height: 1040, margin: "1rem", direction: "rtl" }}>
+      <HomeChips />
       <DataGrid
         rowHeight={80}
         rows={rows}

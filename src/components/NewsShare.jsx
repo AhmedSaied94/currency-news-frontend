@@ -35,23 +35,23 @@ const NewsShare = () => {
     >
       <FacebookShareButton
         children={<GrFacebook className="share" />}
-        url={"http://localhost:3000" + location.pathname}
+        url={"http://38.242.255.43" + location.pathname}
       />
       <TwitterShareButton
         children={<GrTwitter className="share" />}
-        url={"http://localhost:3000" + location.pathname}
+        url={"http://38.242.255.43" + location.pathname}
       />
       <EmailShareButton
         children={<MdEmail className="share" />}
-        url={"http://localhost:3000" + location.pathname}
+        url={"http://38.242.255.43" + location.pathname}
       />
       <WhatsappShareButton
         children={<RiWhatsappFill className="share" />}
-        url={"http://localhost:3000" + location.pathname}
+        url={"http://38.242.255.43" + location.pathname}
       />
       <TelegramShareButton
         children={<RiTelegramFill className="share" />}
-        url={"http://localhost:3000" + location.pathname}
+        url={"http://38.242.255.43" + location.pathname}
       />
     </Box>
   );

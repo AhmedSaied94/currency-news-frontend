@@ -25,6 +25,7 @@ import ResetPassword from "./components/ResetPassword";
 import ResetConfirm from "./components/ResetConfirm";
 import CurrenciesDialog from "./components/CurrenciesDialog";
 import Calculator from "./components/Calculator";
+import { useMediaQuery } from "@mui/material";
 function App({ authedUser, geoData }) {
   const [cookies, setCookie, removeCookie] = useCookies(["currency_news"]);
   const [signCom, setSignCom] = React.useState(false);

@@ -33,6 +33,7 @@ class StateLoader {
                 signup:false,
                 reset:false,
                 changeCur:false,
+                search:false,
                 sympols:{},
                 geoData:{}
             },

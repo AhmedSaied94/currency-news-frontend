@@ -25,6 +25,7 @@ import ResetPassword from "./components/ResetPassword";
 import ResetConfirm from "./components/ResetConfirm";
 import CurrenciesDialog from "./components/CurrenciesDialog";
 import Calculator from "./components/Calculator";
+import SearchDialog from "./components/SearchDialog";
 import { useMediaQuery } from "@mui/material";
 function App({ authedUser, geoData }) {
   const [cookies, setCookie, removeCookie] = useCookies(["currency_news"]);
@@ -142,6 +143,7 @@ function App({ authedUser, geoData }) {
             <ResetPassword />
             <CurrenciesDialog />
             <Calculator />
+            <SearchDialog />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/currency" element={<Currency />} />

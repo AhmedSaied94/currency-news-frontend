@@ -54,6 +54,7 @@ const Search = styled("div")(({ theme }) => ({
   paddingTop: "2px",
   paddingBottom: "2px",
   backgroundColor: theme.palette.grey.light,
+  cursor: "pointer",
   "&:hover": {
     backgroundColor: theme.palette.grey.main,
   },
@@ -85,6 +86,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: theme.palette.grey.dark,
     fontWeight: 700,
     fontSize: "0.8em",
+    cursor: "pointer",
+
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
@@ -352,6 +355,9 @@ const Navbar = (props) => {
               <StyledInputBase
                 placeholder="البحث..."
                 inputProps={{ "aria-label": "search" }}
+                onClick={() =>
+                  Store.dispatch(authInfo({ com: "search", state: "open" }))
+                }
               />
             </Search>
             <Box
@@ -521,6 +527,9 @@ const Navbar = (props) => {
               <StyledInputBase
                 placeholder="البحث..."
                 inputProps={{ "aria-label": "search" }}
+                onClick={() =>
+                  Store.dispatch(authInfo({ com: "search", state: "open" }))
+                }
               />
             </Search>
           </ListItem>

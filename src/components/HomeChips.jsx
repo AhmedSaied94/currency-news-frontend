@@ -50,7 +50,7 @@ const HomeChips = ({ authedUser, sympols }) => {
   };
   return (
     <>
-      {sympols && (
+      {sympols.length > 0 && (
         <Stack
           sx={{
             direction: "ltr",

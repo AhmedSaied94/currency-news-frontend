@@ -137,7 +137,9 @@ function App({ authedUser, geoData }) {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           {geoData.currency && <Navbar />}
-          <div style={largeScreens ? { padding: "0 5rem" } : {}}>
+          <div
+            style={largeScreens ? { padding: "0 5rem" } : { padding: "0 2rem" }}
+          >
             <Login />
             <Signup />
             <ResetPassword />

@@ -99,7 +99,9 @@ const Currency = ({ currency, geoData, authedUser }) => {
                 <Typography variant="h6">
                   {/* {currency.sympol} To {base} Chart */}
                   {currency.currency_type !== "Normal Currency"
-                    ? `التدفق البياني بين ${currency.sympol} و ${geoData.currency}`
+                    ? `التدفق البياني بين ${currency.sympol} و ${
+                        authedUser ? authedUser.home_currency : geoData.currency
+                      }`
                     : `التدفق البياني بين ${currency.sympol} و ${base}`}
                 </Typography>
               </Box>

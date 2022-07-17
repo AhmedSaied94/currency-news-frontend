@@ -49,52 +49,56 @@ const HomeChips = ({ authedUser, sympols }) => {
     window.location.reload();
   };
   return (
-    <Stack
-      sx={{
-        direction: "ltr",
-        flexWrap: "wrap",
-        alignItems: "center",
-        justifyContent: "center",
-        my: 2,
-      }}
-      direction="row"
-      spacing={2}
-    >
-      {ar_curs_sympols.map((cur) => {
-        return (
-          <Chip
-            key={cur}
-            avatar={
-              <Avatar
-                alt={cur}
-                src={`https://countryflagsapi.com/svg/${cur
-                  .substring(0, 2)
-                  .toLowerCase()}`}
+    <>
+      {sympols && (
+        <Stack
+          sx={{
+            direction: "ltr",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "center",
+            my: 2,
+          }}
+          direction="row"
+          spacing={2}
+        >
+          {ar_curs_sympols.map((cur) => {
+            return (
+              <Chip
+                key={cur}
+                avatar={
+                  <Avatar
+                    alt={cur}
+                    src={`https://countryflagsapi.com/svg/${cur
+                      .substring(0, 2)
+                      .toLowerCase()}`}
+                  />
+                }
+                sx={{ my: 1 }}
+                onClick={() =>
+                  onChangeCur(cur).catch((err) => {
+                    console.log(err);
+                  })
+                }
+                label={sympols.find((cr) => cr.sympol === cur).ar_name}
+                variant="outlined"
+                clickable
               />
-            }
+            );
+          })}
+          <Chip
+            icon={<GoPlus />}
+            label="المزيد"
             sx={{ my: 1 }}
             onClick={() =>
-              onChangeCur(cur).catch((err) => {
-                console.log(err);
-              })
+              Store.dispatch(authInfo({ com: "changeCur", state: "open" }))
             }
-            label={sympols.find((cr) => cr.sympol === cur).ar_name}
             variant="outlined"
             clickable
           />
-        );
-      })}
-      <Chip
-        icon={<GoPlus />}
-        label="المزيد"
-        sx={{ my: 1 }}
-        onClick={() =>
-          Store.dispatch(authInfo({ com: "changeCur", state: "open" }))
-        }
-        variant="outlined"
-        clickable
-      />
-    </Stack>
+        </Stack>
+      )}
+    </>
   );
 };
 

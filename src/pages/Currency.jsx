@@ -22,7 +22,7 @@ import NewsSection from "../components/NewsSection";
 import CurrencyHeader from "../components/CurrencyHeader";
 import BasesChips from "../components/BasesChips";
 
-const Currency = ({ currency, geoData }) => {
+const Currency = ({ currency, geoData, authedUser }) => {
   const location = useLocation();
   const query = QueryString.parse(location.search);
   const [cookies] = useCookies(["currency_news"]);
@@ -99,7 +99,9 @@ const Currency = ({ currency, geoData }) => {
                 <Typography variant="h6">
                   {/* {currency.sympol} To {base} Chart */}
                   {currency.currency_type !== "Normal Currency"
-                    ? `التدفق البياني بين ${currency.sympol} و ${geoData.currency}`
+                    ? `التدفق البياني بين ${currency.sympol} و ${
+                        authedUser ? authedUser.home_currency : geoData.currency
+                      }`
                     : `التدفق البياني بين ${currency.sympol} و ${base}`}
                 </Typography>
               </Box>
@@ -135,7 +137,8 @@ const Currency = ({ currency, geoData }) => {
 const mapStateToProps = (state) => {
   const { currency } = state.allCurrencies;
   const { geoData } = state.constants;
-  return { currency, geoData };
+  const { authedUser } = state.user;
+  return { currency, geoData, authedUser };
 };
 
 export default connect(mapStateToProps, { setCurrency })(Currency);
